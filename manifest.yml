@@ -2,7 +2,10 @@
 applications:
 - name: db-viewer
   buildpack: https://github.com/cloudfoundry/ruby-buildpack.git
-  memory: 512M
+  memory: 256M
+  disk-usage: 256M
   instances: 1
   path: .
   command: RAILS_ENV=$RAILS_ENV bundle exec rake cf:on_first_instance db:migrate && exec bundle exec rails s -p $PORT -e $RAILS_ENV
+  services:
+    - mydb
